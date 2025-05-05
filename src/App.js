@@ -4,30 +4,36 @@ import {
   Typography,
   TextField,
   Button,
- 
+  Stack,
   Grid,
   Container,
 } from "@mui/material";
 import Header from "./Header";
+import AmortizationSchedule from "./AmortizationSchedule";
 
 const LoanCalculator = () => {
-  const [loanAmount, setLoanAmount] = useState("");
-  const [interestRate, setInterestRate] = useState("");
-  const [loanTerm, setLoanTerm] = useState("");
+  const [loanAmount, setLoanAmount] = useState("10000");
+  const [interestRate, setInterestRate] = useState("4");
+  const [loanTerm, setLoanTerm] = useState("2");
   const [monthlyPayment, setMonthlyPayment] = useState(null);
 
   const calculatePayment = () => {
-    if(loanAmount!==""&&!interestRate!==""&&!loanTerm!==""){
-    const monthlyRate = interestRate / 100 / 12;
-    const payments = loanTerm * 12;
-    const x = Math.pow(1 + monthlyRate, payments);
-    const monthly = (loanAmount * x * monthlyRate) / (x - 1);
-    setMonthlyPayment(monthly.toFixed(2));
-    }else{
-      return(
-        <div>hi</div>
-      )
-    }
+    if (loanAmount !== "" && interestRate !== "" && loanTerm !== "") {
+
+  const monthlyRate = interestRate / 100 / 12;
+  
+  
+  const payments = loanTerm * 12;
+
+  const numerator = loanAmount * monthlyRate * Math.pow(1 + monthlyRate, payments);
+  const denominator = Math.pow(1 + monthlyRate, payments) - 1;
+  
+  const monthlyEMI = numerator / denominator;
+
+  
+  setMonthlyPayment(monthlyEMI.toFixed(2));
+}
+    
   };
 
   return (
@@ -102,15 +108,15 @@ const LoanCalculator = () => {
         </Box>
 
         {monthlyPayment && (
-          <Box
-            sx={{ mt: 4, p: 2, backgroundColor: "#f5f5f5", borderRadius: 1 }}
-          >
-            <Typography variant="h6">Monthly Payment:</Typography>
-            <Typography variant="h4" sx={{ fontWeight: "bold" }}>
-              ${monthlyPayment}
-            </Typography>
-          </Box>
+          <Stack direction="row" spacing={1} alignItems="center"sx={{ mt:2 }} >
+          <Typography variant="h6">Monthly Payment:</Typography>
+          <Typography variant="h6" sx={{ fontWeight: "bold" }}>
+            ${monthlyPayment}
+          </Typography>
+        </Stack>
         )}
+        {monthlyPayment &&(<AmortizationSchedule loanAmount={loanAmount} interestRate={interestRate}loanTerm={loanTerm}/>)}
+        
       </Container>
     </div>
   );
