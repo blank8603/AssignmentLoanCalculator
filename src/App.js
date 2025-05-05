@@ -12,38 +12,33 @@ import Header from "./Header";
 import AmortizationSchedule from "./AmortizationSchedule";
 
 const LoanCalculator = () => {
-  const [loanAmount, setLoanAmount] = useState("10000");
-  const [interestRate, setInterestRate] = useState("4");
-  const [loanTerm, setLoanTerm] = useState("2");
+  const [loanAmount, setLoanAmount] = useState("100000");
+  const [interestRate, setInterestRate] = useState("8.5");
+  const [loanTerm, setLoanTerm] = useState("5");
   const [monthlyPayment, setMonthlyPayment] = useState(null);
 
   const calculatePayment = () => {
     if (loanAmount !== "" && interestRate !== "" && loanTerm !== "") {
+      const monthlyRate = interestRate / 100 / 12;
 
-  const monthlyRate = interestRate / 100 / 12;
-  
-  
-  const payments = loanTerm * 12;
+      const payments = loanTerm * 12;
 
-  const numerator = loanAmount * monthlyRate * Math.pow(1 + monthlyRate, payments);
-  const denominator = Math.pow(1 + monthlyRate, payments) - 1;
-  
-  const monthlyEMI = numerator / denominator;
+      const numerator =
+        loanAmount * monthlyRate * Math.pow(1 + monthlyRate, payments);
+      const denominator = Math.pow(1 + monthlyRate, payments) - 1;
 
-  
-  setMonthlyPayment(monthlyEMI.toFixed(2));
-}
-    
+      const monthlyEMI = numerator / denominator;
+
+      setMonthlyPayment("1");
+    }
   };
+
+
 
   return (
     <div>
       <Header />
-      <Container 
-        sx={{
-         
-          
-        }}>
+      <Container sx={{}}>
         {/* Main Header - matches the screenshot */}
 
         {/* Subheader from the screenshot */}
@@ -54,8 +49,7 @@ const LoanCalculator = () => {
           sx={{
             fontWeight: "normal",
             mb: 3,
-            mt:5,
-            
+            mt: 5,
           }}
         >
           Loan Calculator Dashboard
@@ -75,7 +69,7 @@ const LoanCalculator = () => {
             </Grid>
             <Grid item xs={12} sm={4}>
               <TextField
-                fullWidth 
+                fullWidth
                 label="Interest Rate (%)"
                 variant="outlined"
                 type="number"
@@ -96,7 +90,7 @@ const LoanCalculator = () => {
           </Grid>
 
           <Button
-            maxWidth = "sm"
+            maxWidth="sm"
             variant="contained"
             color="primary"
             size="normal"
@@ -105,18 +99,19 @@ const LoanCalculator = () => {
           >
             CALCULATE
           </Button>
+
+
         </Box>
 
-        {monthlyPayment && (
-          <Stack direction="row" spacing={1} alignItems="center"sx={{ mt:2 }} >
-          <Typography variant="h6">Monthly Payment:</Typography>
-          <Typography variant="h6" sx={{ fontWeight: "bold" }}>
-            ${monthlyPayment}
-          </Typography>
-        </Stack>
-        )}
-        {monthlyPayment &&(<AmortizationSchedule loanAmount={loanAmount} interestRate={interestRate}loanTerm={loanTerm}/>)}
         
+        {monthlyPayment && (
+          <AmortizationSchedule
+            loanAmount={loanAmount}
+            interestRate={interestRate}
+            loanTerm={loanTerm}
+            setMonthlyPayment={setMonthlyPayment}
+          />
+        )}
       </Container>
     </div>
   );
