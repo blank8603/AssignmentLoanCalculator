@@ -16,19 +16,23 @@ import {
   Button,
 } from "@mui/material";
 
-const AmortizationSchedule = ({ loanAmount, interestRate, loanTerm,setMonthlyPayment }) => {
+const AmortizationSchedule = ({
+  loanAmount,
+  interestRate,
+  loanTerm,
+  setMonthlyPayment,
+}) => {
   const [schedule, setSchedule] = useState([]);
   const [currency, setcurrency] = useState("USD");
   const [monthlyPay, setMonthlyPay] = useState(null);
- 
 
   const handleCurrencyChange = (event) => {
     setcurrency(event.target.value); // Update the selected currency
   };
 
-  const handleReset =()=>{
+  const handleReset = () => {
     setMonthlyPayment(null);
-  }
+  };
 
   useEffect(() => {
     const generateAmortizationSchedule = () => {
@@ -75,44 +79,52 @@ const AmortizationSchedule = ({ loanAmount, interestRate, loanTerm,setMonthlyPay
         </Typography>
       </Stack>
 
+      <Grid
+        container
+        spacing={2}
+        alignItems="center"
+        justifyContent="space-between"
+      >
+        <Grid item>
+          <Select
+            value={currency}
+            onChange={handleCurrencyChange}
+            sx={{ minWidth: 100, mb: 2 ,mt:2 }}
+          >
+            <MenuItem value="USD">USD</MenuItem>
+            <MenuItem value="EUR">EUR</MenuItem>
+            <MenuItem value="GBP">GBP</MenuItem>
+            <MenuItem value="INR">INR</MenuItem>
+            <MenuItem value="JPY">JPY</MenuItem>
+            <MenuItem value="AUD">AUD</MenuItem>
+            <MenuItem value="CAD">CAD</MenuItem>
+          </Select>
+        </Grid>
+
+        <Grid item xs>
+          {/* Empty space to push the button to the right */}
+        </Grid>
+
+        <Grid item>
+          <Button
+            variant="outlined"
+            sx={{
+              display: "flex",
+              justifyContent: "flex-end",
+              width: "20",
+              color: "darkviolet",
+              borderColor: "darkviolet",
+              p:"10px" // Ensures the button width matches its content
+            }}
+            onClick={handleReset}
+          >
+            RESET TABLE
+          </Button>
+        </Grid>
+      </Grid>
       <Typography variant="h6" sx={{ mb: 2, mt: 4 }}>
         Amortization Schedule ({currency})
       </Typography>
-      <Grid container spacing={2} alignItems="center" justifyContent="space-between">
-  <Grid item>
-    <Select
-      value={currency}
-      onChange={handleCurrencyChange}
-      sx={{ minWidth: 100, mb: 2 }}
-    >
-      <MenuItem value="USD">USD</MenuItem>
-      <MenuItem value="EUR">EUR</MenuItem>
-      <MenuItem value="GBP">GBP</MenuItem>
-      <MenuItem value="INR">INR</MenuItem>
-      <MenuItem value="JPY">JPY</MenuItem>
-      <MenuItem value="AUD">AUD</MenuItem>
-      <MenuItem value="CAD">CAD</MenuItem>
-    </Select>
-  </Grid>
-
-  <Grid item xs>
-    {/* Empty space to push the button to the right */}
-  </Grid>
-
-  <Grid item>
-    <Button
-      variant="outlined"
-      sx={{
-        display: "flex",
-        justifyContent: "flex-end",
-        width: "fit-content", // Ensures the button width matches its content
-      }}
-      onClick={handleReset}
-    >
-      RESET TABLE
-    </Button>
-  </Grid>
-</Grid>
       {/* Scrollable container */}
       <TableContainer
         component={Paper}
