@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Typography, Box, Divider, Chip } from "@mui/material";
+import { Container, Typography, Box, Divider} from "@mui/material";
 
 
 const AboutPage = () => {

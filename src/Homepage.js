@@ -4,7 +4,6 @@ import {
   Typography,
   TextField,
   Button,
-  Stack,
   Grid,
   Container,
 } from "@mui/material";
@@ -20,16 +19,6 @@ const LoanCalculator = () => {
   
     const calculatePayment = () => {
       if (loanAmount !== "" && interestRate !== "" && loanTerm !== "") {
-        const monthlyRate = interestRate / 100 / 12;
-  
-        const payments = loanTerm * 12;
-  
-        const numerator =
-          loanAmount * monthlyRate * Math.pow(1 + monthlyRate, payments);
-        const denominator = Math.pow(1 + monthlyRate, payments) - 1;
-  
-        const monthlyEMI = numerator / denominator;
-  
         setMonthlyPayment("1");
       }
     };
