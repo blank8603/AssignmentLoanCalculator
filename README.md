@@ -37,9 +37,10 @@ This is a Loan Calculator web application developed using React. It highlights m
 * Custom 404 page for unmatched routes.
 * Error page for handling runtime issues.
 
-## Deployment Link
 
-[Live Application](https://681a01d3b3f4d80008446659--fluffy-panda-f48df3.netlify.app/)
+##Deployment
+
+Deployed on Netlify with a live link in the GitHub repository’s About section.
 
 
 ## Development Process
@@ -55,7 +56,7 @@ This is a Loan Calculator web application developed using React. It highlights m
 
 ## Deployment Link
 
-[Live Application](#)
+[Live Application](https://681a01d3b3f4d80008446659--fluffy-panda-f48df3.netlify.app/)
 
 ## License
 
