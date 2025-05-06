@@ -1,6 +1,6 @@
 import React from "react";
 import { Container, Typography, Box, Divider, Chip } from "@mui/material";
-import { Code, Api, Calculate, Palette, Public } from "@mui/icons-material";
+
 
 const AboutPage = () => {
   return (

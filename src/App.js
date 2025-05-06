@@ -8,10 +8,11 @@ import Navigation from "./Navigation";
 import AboutPage from "./About";
 // import ContactPage from "./ContactPage";
 import ErrorPage from "./ErrorPage";
+import Exchangerates from "./Exchangerates";
 
 const AppContent = ({ toggleTheme, isDarkMode }) => {
   const location = useLocation(); // Safe to use here, within Router
-  const noNavbarPaths = ["/", "/about", "/Exchangerates"]; 
+  const noNavbarPaths = ["/", "/about", "/ExchangeRates"]; 
 
   const shouldShowNavbar = noNavbarPaths.some((path) => location.pathname === path); // Paths where navbar shouldn't appear
 
@@ -25,7 +26,8 @@ const AppContent = ({ toggleTheme, isDarkMode }) => {
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/about" element={<AboutPage />} />
-        <Route path="/404" element={<ErrorPage />} />
+       
+        <Route path="/ExchangeRates" element={<Exchangerates />} />
         <Route path="/ErrorPage" element={<ErrorPage />} />
         <Route path="*" element={<ErrorPage />} /> {/* Catch-all for undefined routes */}
       </Routes>
